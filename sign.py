@@ -94,6 +94,8 @@ def fetch_unsigned_package(name, version):
     unsigned.extractall(path=tmp.name)
     unsigned.close()
 
+    os.unlink(package)
+
     return tmp
 
 
@@ -107,7 +109,7 @@ def create_signed_package(path, name, tmp):
     cwd = os.getcwd()
     os.chdir(tmp.name)
 
-    signed.add('.', recursive=True)
+    signed.add(name, recursive=True)
 
     os.chdir(cwd)
 
